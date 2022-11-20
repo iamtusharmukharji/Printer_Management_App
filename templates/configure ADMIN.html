@@ -1,0 +1,344 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    
+    <title>Printer Configuration</title>
+    
+    <link rel="icon" href="{{url_for('static', filename='titleImg.png')}}" type="image/icon type">
+    <style>
+        #body {
+            border: 1px solid black;
+
+        }
+
+        .form {
+            /* border: 0px solid black; */
+            width: 35%;
+            height: 66%;
+            float: left;
+            margin-top: 5%;
+            margin-bottom: 10%;
+            margin-left: 13%;
+            margin-right: auto;
+            background-color: rgb(255, 255, 255, 0.95);
+            box-shadow: 15px 0px 15px   #a5abae;
+        }
+
+        .vacant {
+
+            /*border: 1px solid black;*/
+            width: 19%;
+            height: 100%;
+
+        }
+        .nav-but .button {
+            background-color: #52abde;
+            border: 1px solid #4096c7;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            float: left;
+            width: 20%;
+
+        }
+
+        .nav-but .button:not(:last-child) {
+            border-right: none;
+            /* Prevent double borders */
+        }
+
+        .nav-but .button:hover {
+            background-color: #4096c7;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none; 
+            }
+
+        input[type=number] {
+            -moz-appearance: textfield;
+            }
+
+        input[type=text],
+        select,
+        textarea {
+            width: 100%;
+            height: 8%;
+            padding: 2px;
+            border: 3px solid #ccc;
+            border-radius: 5px;
+            resize: vertical;
+            -webkit-transition: 0.5s;
+            transition: 0.5s;
+            outline: none 
+        }
+        input[type=text]:focus{
+            border: 3px solid #e78104;
+        }
+
+        input[type=number],
+        select,
+        textarea {
+            width: 100%;
+            height: 8%;
+            padding: 2px;
+            border: 3px solid #ccc;
+            border-radius: 5px;
+            resize: vertical;
+            -webkit-transition: 0.5s;
+            transition: 0.5s;
+            outline: none;
+        }
+        input[type=number]:focus{
+            border: 3px solid #e78104;
+        }
+
+        .sel {
+            width: 100%;
+            height: 8%;
+            padding: 2px;
+            border: 3px solid #ccc;
+            border-radius: 5px;
+            resize: vertical;
+            -webkit-transition: 0.5s;
+            transition: 0.5s;
+            outline: none;
+        }
+        .sel:focus{
+            border: 3px solid #e78104;
+        }
+
+        label {
+            padding: 12px 12px 12px 0;
+            display: inline-block;
+        }
+
+        input[type=submit] {
+            background-color: #4CAF50;
+            color: rgb(39, 38, 38);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            float: right;
+        }
+
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+
+        .container {
+            background-color: #4096c7;
+            padding: 20px;
+        }
+
+        .col-25 {
+            float: left;
+            width: 45%;
+            margin-top: 3px;
+            color: white;
+            font-family: Arial;
+            padding: 5px;
+        }
+
+        .col-75 {
+            float: left;
+            width: 40%;
+            margin-top: 6px;
+            
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+        @media screen and (max-width: 600px) {
+
+            .col-25,
+            .col-75,
+            input[type=submit] {
+                width: 100%;
+                margin-bottom: 0;
+            }
+        }
+        .butt_div{
+            width: 100%;
+            height: 15%;
+            background-color: #4096c7;
+            font-family: arial;
+            font-size: 20px; 
+            box-shadow: 5px 10px 15px 3px #a5abae;
+             
+        }
+        .butt{
+            width: 90%;
+            height: 60%;
+            margin-top: 0%;
+            background-color: rgb(77,199,7);
+            border: none;
+            color: white;
+            font-family: Arial;
+            font-size: 20px;
+            
+        }
+        .butt:hover{
+            background-color: rgb(64, 167, 4);
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav-but" style="margin-top: -7px;">
+        <form action="{{url_for('homeDashADMIN')}}">  
+            <button class="button" type="submit" name="dash" value="dash" style="outline:#4096c7 solid 1px;">Dashboard</button>
+        </form>
+
+        <form action="{{url_for('reportsADMIN')}}">  
+            <button class="button" type="submit" name="report" value="report" style="outline:#4096c7 solid 1px;outline:#4096c7 solid 1px;">Report</button>
+        </form>
+
+        <form action="{{url_for('config_printerADMIN')}}">  
+            <button class="button" type="submit" name="config" value="config" style="outline:#4096c7 solid 1px;outline:#4096c7 solid 1px;">Printer Configuration</button>
+        </form>
+
+        <form action="https://docs.google.com/forms/d/e/1FAIpQLSe8YH3trfR2vRgVYFdV4jsEC63fTnVCr1azIx-CH8dJyj20YA/viewform?usp=sf_link">  
+            <button class="button" type="submit" style="outline:#4096c7 solid 1px;outline:#4096c7 solid 1px;">Feedback</button>
+        </form>
+        <form action="{{url_for('logout')}}">  
+            <button class="button" type="submit" name="config" value="config" onclick="return confirm('Are you sure to LOG OUT?')" style="outline:#4096c7 solid 1px;outline:#4096c7 solid 1px;">Log Out</button>
+        </form>
+    </div>
+
+    <div id="body">
+        <div class="vacant" style="float: left;"></div>
+        <div class="vacant" style="float: right;"></div>
+        
+        <div class="form">
+            <div style="padding: 10px; width: 100%;height: 10%;background-color: #e78104;color:white;font-family: arial;font-size: 20px;">
+                <center>Printer Configuration Form</h2></center>
+            </div>
+                <div>
+
+                    <center>
+                        <div class="container">
+                            <form action="{{ url_for('db_connectionADMIN') }}"  method="POST">
+                                <div class="row">
+                                    <div class="col-25">
+                                        <label for="fname"><strong>Printer Name</strong></label>
+                                    </div>
+                                    <div class="col-75">
+                                        <input type="text" id="fname" name="printerName" placeholder="Printer name..">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-25">
+                                        <label for="ip"><strong>IP Address</strong></label>
+                                    </div>
+                                    <div class="col-75">
+                                        <input type="text" id="ip" name="ip" placeholder="IP Address..">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-25">
+                                        <label for="serial"><strong>Serial Number</strong></label>
+                                    </div>
+                                    <div class="col-75">
+                                        <input type="text" id="serial" name="serial" placeholder="Serial Number.." required>
+                                    </div>
+                                </div>
+
+                                
+                             
+                                <div class="row">
+                                    <div class="col-25">
+                                        <label for="department"><strong>Entity</strong></label>
+                                    </div>
+                                    <div class="col-75">
+                                        <select id="department" class='sel' name="department">
+                                            <option value="Fulfilment Center">Fulfilment Center</option>
+                                            <option value="Mother Hub">Mother Hub</option>
+                                            <option value="Grocery">Grocery</option>
+                                            <option value="Hyper local">Hyper local</option>
+                                            <option value="Large DC">Large DC</option>
+                                            <option value="Large Last Mile">Large Last Mile</option>
+                                            <option value="Regional Office">Regional Office</option>
+                                            <option value="Zonal Office">Zonal Office</option>
+                                            <option value="Transport Center">Transport Center</option>
+                                            <option value="FPS">FPS</option>
+                                            <option value="Cross Dock-Grocery">Cross Dock-Grocery</option>
+                                            <option value="CL-First Mile">CL-First Mile</option>
+                                            <option value="CL-Last Mile">CL-Last Mile</option>
+                                            <option value="CL-ODH">CL-ODH</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                
+
+                                <div class="row">
+                                    <div class="col-25">
+                                        <label for="locationcode"><strong>Location Code</strong> </label>
+                                    </div>
+                                    <div class="col-75">
+                                        <input type="number" maxlength="4" id="locationcode" name="locationcode" placeholder="Location Code..">
+                                    </div>
+                                </div>
+
+                                
+                                <div class="row">
+                                    <div class="col-25">
+                                        <label for=status><strong>Status</strong></label>
+                                    </div>
+                                    <div class="col-75">
+                                        <select id="status" class='sel' name="status">
+                                            <option value="Deployed">Deployed</option>
+                                            <option value="Stock">Stock</option>
+                                            <option value="Damage">Damage</option>
+                                            <option value="Faulty">Faulty</option>
+                                            <option value="Out_of_contract">Out of Contract</option>
+                                        </select>
+                                    </div>
+                                </div>
+                    </center>
+                       
+                </div>
+
+                <div class="butt_div">
+                
+                    <center><button class="butt" type="submit">Submit</button></center>
+                </form>
+                </div>
+
+            
+
+
+        </div>
+
+    </div>
+</div>
+
+
+</body>
+
+
+
+
+</html>

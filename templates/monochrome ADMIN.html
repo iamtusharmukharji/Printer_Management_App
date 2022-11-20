@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<head>
+    <title>Monochrome</title>
+<style>
+    .nav-but .button {
+          background-color: #52abde; /* Green */
+          border: 1px solid #4096c7;
+          color: white;
+          padding: 15px 32px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          float: left;
+          width: 20%;
+        }
+        
+        .nav-but .button:not(:last-child) {
+          border-right: none; /* Prevent double borders */
+        }
+        
+        .nav-but .button:hover {
+          background-color: #4096c7;}
+        
+        button:active{
+          border: 1px solid #4096c7;
+          outline:#4096c7 solid 1px;
+        }
+
+        .thanks{
+            font-family: Arial;
+            font-size: 30px;
+            color: #ec6b16;
+        
+        }
+
+</style>
+
+</head>
+<body>
+  
+    <div class="nav-but">
+        <div class="nav-but">
+            <form action="{{url_for('homeDashADMIN')}}">  
+                <button class="button" type="submit" name="dash" value="dash" style="outline:#4096c7 solid 1px;outline:#4096c7 solid 1px;">Dashboard</button>
+            </form>
+
+            <form action="{{url_for('reportsADMIN')}}">  
+                <button class="button" type="submit" name="report" value="report" style="outline:#4096c7 solid 1px;outline:#4096c7 solid 1px;">Report</button>
+            </form>
+
+            <form action="{{url_for('config_printerADMIN')}}">  
+                <button class="button" type="submit" name="config" value="config" style="outline:#4096c7 solid 1px;outline:#4096c7 solid 1px;">Printer Configuration</button>
+            </form>
+
+            <form action="https://docs.google.com/forms/d/e/1FAIpQLSe8YH3trfR2vRgVYFdV4jsEC63fTnVCr1azIx-CH8dJyj20YA/viewform?usp=sf_link">  
+                <button class="button" type="submit" style="outline:#4096c7 solid 1px;outline:#4096c7 solid 1px;">Feedback</button>
+            </form>
+            <form action="{{url_for('logout')}}">  
+                <button class="button" type="submit" name="config" value="config" onclick="return confirm('Are you sure to LOG OUT?')" style="outline:#4096c7 solid 1px;outline:#4096c7 solid 1px;">Log Out</button>
+            </form>
+        </div>
+        <div class="thanks">
+            <center><br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+
+            <h4>Under Construction!</h4></center>
+        </div>
+
+</body>
+
+</html>

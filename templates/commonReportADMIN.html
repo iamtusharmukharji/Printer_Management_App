@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<head>
+    <title>Report</title>
+    <link rel="icon" href="{{url_for('static', filename='titleImg.png')}}" type="image/icon type">
+<style>
+    .nav-but .button {
+          background-color: #52abde;
+          border: 1px solid #4096c7;
+          color: white;
+          padding: 15px 32px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          float: left;
+          width: 20%;
+          margin-bottom: 20px;
+        }
+        
+        .nav-but .button:not(:last-child) {
+          border-right: none; /* Prevent double borders */
+        }
+        
+        .nav-but .button:hover {
+          background-color: #4096c7;}
+        
+        button:active{
+          border: 1px solid #4096c7;
+          outline:#4096c7 solid 1px;
+        }
+        #data_table {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            font-size: 13px;
+            width: 100%;
+	    
+        }
+
+        #data_table td, #data_table th {
+            border: 1px solid rgb(107, 104, 104);
+            padding: 8px;
+            text-align: center;
+        }
+        #data_table th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            font-size: 13px;
+            background-color: #e78104;
+            color: white;
+            border: 1px solid rgb(107, 104, 104);;
+            text-align: center;
+	    
+        }
+        #data_table tr:nth-child(even){
+            background-color: #b2e9f5;
+            }
+	
+            .export0 .exp_butt0{
+            height: 30px;
+            width: 10%;
+            float: left;
+            margin-left: 5% ;
+            margin-bottom: 1% ;
+            background-color: white ;
+            border: 2px solid #52abde;
+            font-family: arial;
+	        border-radius: 10px;
+        }
+        
+        .export0 .exp_butt0:hover{
+            background-color: #4096c7 ;
+            color: white;
+            font-family: arial;
+	        cursor: pointer;
+        }	
+	    .export0 .exp_butt0:active{
+            background-color: #4096c7 ;
+            color: white;
+            font-family: arial;
+	        border: none;
+        }
+
+        .export .exp_butt{
+            height: 30px;
+            width: 5%;
+            float: right;
+            margin-right: 4.9% ;
+            margin-bottom: 1% ;
+            background-color: white ;
+            border: 2px solid #52abde;
+            font-family: arial;
+            
+            margin-left: 0%;
+	        
+        }
+        
+        .export .exp_butt:hover{
+            background-color: #4096c7 ;
+            color: white;
+            font-family: arial;
+	        cursor: pointer;
+        }	
+	    .export .exp_butt:active{
+            background-color: #4096c7 ;
+            color: white;
+            font-family: arial;
+	        border: none;
+        }
+        .export .srch,select{
+            height: 24px;
+            width:16.6%;
+            border: 2px solid #52abde;
+            border-right: none;
+            margin-left: 58%;
+            
+        }
+        .export .srch:focus{
+           outline: none;
+           border: 2px solid #e78104;
+           border-right: none;
+        }
+        
+</style>
+
+</head>
+<body>
+  
+    <div class="nav-but">
+        <div class="nav-but">
+            <form action="{{url_for('homeDashADMIN')}}">  
+                <button class="button" type="submit" name="dash" value="dash" style="outline:#4096c7 solid 1px;outline:#4096c7 solid 1px;">Dashboard</button>
+            </form>
+
+            <form action="{{url_for('reportsADMIN')}}">  
+                <button class="button" type="submit" name="report" value="report" style="outline:#4096c7 solid 1px;outline:#4096c7 solid 1px;">Report</button>
+            </form>
+
+            <form action="{{url_for('config_printerADMIN')}}">  
+                <button class="button" type="submit" name="config" value="config" style="outline:#4096c7 solid 1px;outline:#4096c7 solid 1px;">Printer Configuration</button>
+            </form>
+
+            <form action="https://docs.google.com/forms/d/e/1FAIpQLSe8YH3trfR2vRgVYFdV4jsEC63fTnVCr1azIx-CH8dJyj20YA/viewform?usp=sf_link">  
+                <button class="button" type="submit" style="outline:#4096c7 solid 1px;outline:#4096c7 solid 1px;">Feedback</button>
+            </form>
+            <form action="{{url_for('logout')}}">  
+                <button class="button" type="submit" name="config" value="config" onclick="return confirm('Are you sure to LOG OUT?')" style="outline:#4096c7 solid 1px;outline:#4096c7 solid 1px;">Log Out</button>
+            </form>
+        </div>
+
+        <div class="export0">
+            <input type="button" class="exp_butt0" value="Export To CSV">
+         </div>
+ 
+         <div class="export">
+            <form method="POST" action='{{url_for("filterADMIN")}}'>
+                <input type="text" name='search' class='srch' placeholder="Search for serial,IP,state,brand,cost center...."><button type="submit" class="exp_butt">Filter</button>
+                
+            </form>    
+        </div>
+
+   <table id="data_table">
+	<tr>
+	        <th>Serial</th>
+            <th>IP</th>
+            <th>Name</th>
+            <th>Brand</th>
+            <th>Model</th>
+            <th>Type</th>
+            <th>Region</th>
+            <th>State</th>
+            <th>Location</th>
+            <th>Location Code</th>
+            <th>Entity</th>
+            <th>Cost Center</th>
+            <th>Status</th>
+            <th>Toner Level</th>
+            <th>Page Count</th>
+            <th>Last Sync</th>
+            
+	</tr>
+	    {% for i in data %}
+	    <tr>
+            <td>{{i.serial}}</td>
+		    <td>{{i.ip}}</td>
+            <td>{{i.name}}</td>
+            <td>{{i.brand}}</td>
+            <td>{{i.model}}</td>
+            <td>{{i.printer_type}}</td>
+            <td>{{i.region}}</td>
+            <td>{{i.state}}</td>
+            <td>{{i.location}}</td>
+            <td>{{i.loc_code}}</td>
+            <td>{{i.dept}}</td>
+            <td>{{i.cost_center}}</td>
+            <td>{{i.status}}</td>	
+            <td>{{i.toner}}</td>
+            <td>{{i.page}}</td>
+            <td>{{i.sync}}</td>
+		</tr>
+        {% endfor %}
+	    				
+
+  </table>
+
+
+
+<script>
+            function download_csv(csv, filename) {
+    var csvFile;
+    var downloadLink;
+
+    // CSV FILE
+    csvFile = new Blob([csv], {type: "text/csv"});
+
+    // Download link
+    downloadLink = document.createElement("a");
+
+    // File name
+    downloadLink.download = filename;
+
+    // We have to create a link to the file
+    downloadLink.href = window.URL.createObjectURL(csvFile);
+
+    // Make sure that the link is not displayed
+    downloadLink.style.display = "none";
+
+    // Add the link to your DOM
+    document.body.appendChild(downloadLink);
+
+    // Lanzamos
+    downloadLink.click();
+}
+
+function export_table_to_csv(html, filename) {
+	var csv = [];
+	var rows = document.querySelectorAll("table tr");
+	
+    for (var i = 0; i < rows.length; i++) {
+		var row = [], cols = rows[i].querySelectorAll("td, th");
+		
+        for (var j = 0; j < cols.length; j++) 
+            row.push(cols[j].innerText);
+        
+		csv.push(row.join(","));		
+	}
+
+    // Download CSV
+    download_csv(csv.join("\n"), filename);
+}
+
+document.querySelector("input").addEventListener("click", function () {
+    var html = document.querySelector("table").outerHTML;
+	export_table_to_csv(html, "Printer_Report.csv");
+});
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<head>
+    <title>Zonewise</title>
+<style>
+    .nav-but .button {
+          background-color: #52abde; /* Green */
+          border: 1px solid #4096c7;
+          color: white;
+          padding: 15px 32px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          float: left;
+          width: 20%;
+        }
+        
+        .nav-but .button:not(:last-child) {
+          border-right: none; /* Prevent double borders */
+        }
+        
+        .nav-but .button:hover {
+          background-color: #4096c7;}
+        
+        button:active{
+          border: 1px solid #4096c7;
+          outline:#4096c7 solid 1px;
+        }
+
+        #tile_parent{
+        height:300px;
+        width: 100%;
+
+    }
+
+    .menu_tile{
+      height: 50%;
+      width: 17%;
+      font-family: Arial;
+      font-size: 16px;
+      color: #bab5af;
+      box-shadow: 5px 5px 5px 0px;
+      border-radius: 1px;
+      background-color: #f58e11;
+      text-align: center;
+      float: left;
+      margin-left:  4%;
+      margin-right: 4%;
+      margin-top: 1.5%;
+      margin-bottom: 1.5%;
+      cursor: pointer;
+    }
+
+    div.menu_tile:hover{
+      background-color: #e78104;
+      height: 55%;
+      width:  19%;
+      font-family: Arial;
+      font-size: 50%;
+      color:     #bab5af;
+      border-radius: 1px;
+      text-align: center;
+      float: left;
+      margin-left:  3%;
+      margin-right: 3%;
+      margin-top: 0.5%;
+      cursor: pointer;
+      font-size: inherit ;
+    }
+
+    .tile_click{
+        background-color:#f58e11 ;
+        width:  100%;
+        height: 150px;
+        cursor: inherit;
+        border: none;
+        color: white;
+        font-family: Arial;
+        font-size: 20px;
+    }
+    .tile_click:hover{
+        background-color:#e78104 ;
+        width:  100%;
+        height: 170px;
+        cursor: inherit;
+        border: none;
+    }
+        
+        #empty{
+        height: 250px;
+        width: 100%;
+    }
+
+</style>
+
+</head>
+<body>
+  
+    <div class="nav-but">
+        <div class="nav-but">
+            <form action="{{url_for('homeDashADMIN')}}">  
+                <button class="button" type="submit" name="dash" value="dash" style="outline:#4096c7 solid 1px;outline:#4096c7 solid 1px;">Dashboard</button>
+            </form>
+
+            <form action="{{url_for('reportsADMIN')}}">  
+                <button class="button" type="submit" name="report" value="report" style="outline:#4096c7 solid 1px;outline:#4096c7 solid 1px;">Report</button>
+            </form>
+
+            <form action="{{url_for('config_printerADMIN')}}">  
+                <button class="button" type="submit" name="config" value="config" style="outline:#4096c7 solid 1px;outline:#4096c7 solid 1px;">Printer Configuration</button>
+            </form>
+
+            <form action="https://docs.google.com/forms/d/e/1FAIpQLSe8YH3trfR2vRgVYFdV4jsEC63fTnVCr1azIx-CH8dJyj20YA/viewform?usp=sf_link">  
+                <button class="button" type="submit" style="outline:#4096c7 solid 1px;outline:#4096c7 solid 1px;">Feedback</button>
+            </form>
+            <form action="{{url_for('logout')}}">  
+                <button class="button" type="submit" name="config" value="config" onclick="return confirm('Are you sure to LOG OUT?')" style="outline:#4096c7 solid 1px;outline:#4096c7 solid 1px;">Log Out</button>
+            </form>
+        </div>
+        <div id='empty'></div>
+
+        <div id="tile_parent">
+
+                <div class="menu_tile">
+                    <form action="{{url_for('east_reportADMIN')}}">
+                        <button class="tile_click" type="submit">East</button>
+                    </form>
+                </div>
+        
+                <div class="menu_tile">
+                    <form action="{{url_for('west_reportADMIN')}}">
+                        <button class="tile_click" type="submit">West</button>
+                    </form>
+                </div>
+
+                <div class="menu_tile">
+                    <form action="{{url_for('north_reportADMIN')}}">
+                        <button class="tile_click" type="submit">North</button>
+                    </form>
+                </div>
+
+                <div class="menu_tile">
+                    <form action="{{url_for('south_reportADMIN')}}">
+                        <button class="tile_click" type="submit">South</button>
+                    </form>
+                </div>
+        </div>
+</body>
+
+</html>

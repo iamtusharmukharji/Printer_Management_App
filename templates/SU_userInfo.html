@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <link rel="icon" href="{{url_for('static', filename='titleImg.png')}}" type="image/icon type">
+    
+    <title>PMT-User Manager</title>
+    <style>
+         .blank_space{
+            height: 27px;
+            width: 10%;
+            float: right;
+            margin-right: 5% ;
+            margin-bottom: 1% ;
+            background-color: white ;
+            font-family: arial;
+	        border-top:#4096c7 solid 1px;
+
+        }
+        .nav-but .button {
+            background-color: #52abde;
+            border: 1px solid #4096c7;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            float: left;
+            width: 25%;
+
+        }
+
+        .nav-but .button:not(:last-child) {
+            border-right: none;
+        }
+
+        .nav-but .button:hover {
+            background-color: #4096c7;
+        }
+
+        button:active {
+            border: 1px solid #4096c7;
+            outline: #4096c7 solid 1px;
+        }
+
+        #logo {
+            height: 250px;
+            margin-top: 50px;
+
+        }
+
+        #tile_parent {
+            height: 300px;
+            width: 100%;
+
+        }
+
+        .menu_tile {
+            height: 200px;
+            width: 200px;
+            border: 5px solid rgb(0, 162, 232);
+            float: left;
+            cursor: pointer;
+            align-items: center;
+            margin-left: 22%;
+            border-radius: 100%;
+            padding-top:4%;
+        }
+
+        div.menu_tile:hover {
+            height: 200px;
+            width: 200px;
+            background-color: #ffffff;
+            border: 5px solid rgb(232, 104, 0);
+        }
+
+        .header {
+            width: 100%;
+            height: 70px;
+            padding: 10px 0px 5px 0px;
+            position: fixed;
+            -webkit-box-shadow: 0 6px 8px -6px #222;
+            -moz-box-shadow: 0 6px 8px -6px #222;
+            box-shadow: 0 6px 8px -6px #222;
+            background-color: rgb(0, 162, 232);
+            top: 0;
+            left: 0;
+
+        }
+
+        .dropbtn {
+            background-color: rgb(0, 162, 232);
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: rgb(1, 130, 185);
+        }
+        #data_table {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            font-size: 13px;
+            width: 100%;
+            margin-top: 100px;
+	    
+        }
+
+        #data_table td, #data_table th {
+            border: 1px solid rgb(107, 104, 104);
+            padding: 8px;
+            text-align: center;
+        }
+        #data_table th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            font-size: 13px;
+            background-color: #e78104;
+            color: white;
+            border: 1px solid rgb(107, 104, 104);;
+            text-align: center;
+	    
+        }
+        #data_table tr:nth-child(even){background-color: #b2e9f5;}
+        a.edit:link,a.edit:visited {
+            background-color: #fde400;
+            color: black;
+            padding: 6px 6px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px 5px 5px 5px;
+            margin-right: 6px;
+            
+        }          
+
+        a.edit:hover, a.edit:active {
+        background-color: #daca3b;
+        }
+
+        a.delete:link,a.delete:visited{
+            background-color: #e45959;
+            color: white;
+            padding: 6px 6px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px 5px 5px 5px;
+            
+        }          
+
+        a.delete:hover, a.delete:active {
+        background-color: rgb(247, 21, 21);
+        }
+        
+    </style>
+
+</head>
+
+<body>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+     
+
+    <div class="header">
+        <div
+            style="height: 100%; width: 300px; float: left;margin-left:40% ;color: aliceblue; font-size: 22px; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; padding-top: 5px;">
+            PMT User Management Portal
+        </div>
+        <div class="dropdown" style="float:right;">
+            <button class="dropbtn"><i class='fas fa-user-alt' style='font-size:20px;color:rgb(241, 241, 241)'></i> &nbsp;{{user.Name}} ⏷</button>
+            <div class="dropdown-content">
+                <a href="/admin/{{user.UserID}}">Home</a>
+                <a href="{{url_for('SU_logout')}}">Logout 🔑</a>
+                
+            </div>
+        </div>
+    </div>
+    
+    <table id="data_table">
+        <tr>
+                <th>Name</th>
+                <th>User Name</th>
+                <th>User Type</th>
+                <th>Action</th>
+                
+                
+        </tr>
+            {% for i in data %}
+            {% set id1=i.UserID.split('.') %}
+            {% set id=(id1[0]+id1[1]).split('@') %}
+            <tr>
+                <td>{{i.Name}}</td>
+                <td>{{i.UserID}}</td>
+
+                {% if  i.Rights==0%}
+                <td>Standard</td>
+                {% elif  i.Rights==1%}
+                <td>Admin</td>
+                {% elif  i.Rights==2%}
+                <td>Super Admin</td>
+                {% endif %}                
+                <td>
+                    <a href="/admin/UserInfo/update/{{i.UserID}}" class="edit" data-toggle="modal" data-target="#modaledit{{id[0]}}"> Edit </a>
+                    <a href="/admin/UserInfo/reset/{{i.UserID}}" class="delete" onclick="return confirm('New password will be sent on {{i.UserID}}')">Reset</a>
+                    <a href="/admin/UserInfo/delete/{{i.UserID}}" class="delete" onclick="return confirm('Do you really want to DELETE?')">Delete</a>
+                </td>
+            </tr>
+
+
+            <div id="modaledit{{id[0]}}" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+              
+              
+                   <div class="modal-content">
+              
+              
+                      <div class="modal-header">
+              
+              
+                         <h4 class="modal-title">Edit User</h4>
+              
+              
+                      </div>
+              
+              
+                        <div class="modal-body">
+              
+              
+                         <form action="{{url_for('SU_edit')}}" method="POST">
+              
+              
+                                <div class="form-group">
+                                    <label>Name:</label>
+                                    <input type="hidden"  name="name" value="{{i.Name}}">
+                                    <input type="text" class="form-control" name="name" value="{{i.Name}}" disabled>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>User ID:</label>
+                                    <input type="hidden"  name="id" value="{{i.UserID}}">
+                                    <input type="text" class="form-control" name="id" value="{{i.UserID}}" disabled>
+                                </div>
+            
+                                <div class="form-group">            
+                                    <label>User Rights:</label>
+                    
+                                    <select class="form-control" id="status" name="right">
+                                        <option value={{i.Rights}} selected hidden>{{i.Rights}}</option>
+                                        <option value=0>Standard User</option>
+                                        <option value=1>Admin User</option>
+                                        <option value=2>Super User</option>
+                                    </select>
+                                </div>
+              
+                                <div class="form-group">
+                
+                                    <button class="btn btn-primary" type="submit">Make Changes</button>
+                                
+                                </div>
+              
+              
+                         </form>
+              
+              
+                        </div>
+              
+              
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background-color: #ec6b16;">Close</button>
+                        </div>
+              
+              
+                   </div>
+              
+              
+                </div>
+              
+             </div>
+
+              
+            {% endfor %}
+                            
+    
+      </table>
+
+</body>
+
+</html>

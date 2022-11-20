@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<head>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="icon" href="{{url_for('static', filename='titleImg.png')}}" type="image/icon type">
+    <title>Manage Printers</title>
+<style>
+   
+   .nav-but .button {
+      background-color: #52abde;
+      border: 1px solid #4096c7;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      float: left;
+      width: 20%;
+    
+    }
+
+    .nav-but .button:not(:last-child) {
+      border-right: none;
+    }
+
+    .nav-but .button:hover {
+      background-color: #4096c7;
+    }
+    button:active{
+      border: 1px solid #4096c7;
+      outline:#4096c7 solid 1px;
+    }
+
+        .thanks{
+            font-family: Arial;
+            font-size: 30px;
+            color: #ec6b16;
+        
+        }
+        .blank_space{
+            height: 27px;
+            width: 10%;
+            float: right;
+            margin-right: 5% ;
+            margin-bottom: 1% ;
+            background-color: white ;
+            font-family: arial;
+	        border-top:#4096c7 solid 1px;
+
+        }
+        #data_table {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            font-size: 13px;
+            width: 100%;
+	    
+        }
+
+        #data_table td, #data_table th {
+            border: 1px solid rgb(107, 104, 104);
+            padding: 8px;
+            text-align: center;
+        }
+        #data_table th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            font-size: 13px;
+            background-color: #e78104;
+            color: white;
+            border: 1px solid rgb(107, 104, 104);;
+            text-align: center;
+	    
+        }
+        #data_table tr:nth-child(even){background-color: #b2e9f5;}
+        a.edit:link,a.edit:visited {
+            background-color: #fde400;
+            color: black;
+            padding: 6px 6px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px 5px 5px 5px;
+            margin-right: 6px;
+            
+        }          
+
+        a.edit:hover, a.edit:active {
+        background-color: #daca3b;
+        }
+
+        a.delete:link,a.delete:visited{
+            background-color: #e45959;
+            color: white;
+            padding: 6px 6px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px 5px 5px 5px;
+            
+        }          
+
+        a.delete:hover, a.delete:active {
+        background-color: rgb(247, 21, 21);
+        }
+        
+
+
+
+
+</style>
+
+</head>
+<body>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+     
+  
+    
+        <div class="nav-but">
+            <form action="{{url_for('homeDashADMIN')}}">  
+                <button class="button" type="submit" name="dash" value="dash" style="outline:#4096c7 solid 1px;outline:#4096c7 solid 1px;">Dashboard</button>
+            </form>
+
+            <form action="{{url_for('reportsADMIN')}}">  
+                <button class="button" type="submit" name="report" value="report" style="outline:#4096c7 solid 1px;outline:#4096c7 solid 1px;">Report</button>
+            </form>
+
+            <form action="{{url_for('config_printerADMIN')}}">  
+                <button class="button" type="submit" name="config" value="config" style="outline:#4096c7 solid 1px;outline:#4096c7 solid 1px;">Printer Configuration</button>
+            </form>
+
+            <form action="https://docs.google.com/forms/d/e/1FAIpQLSe8YH3trfR2vRgVYFdV4jsEC63fTnVCr1azIx-CH8dJyj20YA/viewform?usp=sf_link">  
+                <button class="button" type="submit" style="outline:#4096c7 solid 1px;outline:#4096c7 solid 1px;">Feedback</button>
+            </form>
+            <form action="{{url_for('logout')}}">  
+                <button class="button" type="submit" name="config" value="config" onclick="return confirm('Are you sure to LOG OUT?')" style="outline:#4096c7 solid 1px;outline:#4096c7 solid 1px;">Log Out</button>
+            </form>
+        </div>
+
+        <div class="blank_space">
+            
+        </div>
+        
+        <table id="data_table">
+            <tr>
+                    <th>Serial</th>
+                    <th>IP</th>
+                    <th>Name</th>
+                    <th>Brand</th>
+                    <th>Model</th>
+                    <th>Type</th>
+                    <th>Region</th>
+                    <th>State</th>
+                    <th>Location</th>
+                    <th>Location Code</th>
+                    <th>Entity</th>
+                    <th>Cost Center</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                    
+            </tr>
+                {% for i in data %}
+                <tr>
+                    <td>{{i.serial}}</td>
+                    <td>{{i.ip}}</td>
+                    <td>{{i.name}}</td>
+                    <td>{{i.brand}}</td>
+                    <td>{{i.model}}</td>
+                    <td>{{i.printer_type}}</td>
+                    <td>{{i.region}}</td>
+                    <td>{{i.state}}</td>
+                    <td>{{i.location}}</td>
+                    <td>{{i.loc_code}}</td>
+                    <td>{{i.dept}}</td>
+                    <td>{{i.cost_center}}</td>
+                    <td>{{i.status}}</td>	
+                    <td>
+                        <a href="/home/dashboard/makeChanges/update/{{i.serial}}" class="edit" data-toggle="modal" data-target="#modaledit{{i.serial}}"> Edit </a>
+                        {% if user.Rights>=1 %}
+                        <a href="/home/dashboard/makeChanges/delete/{{i.serial}}" class="delete" onclick="return confirm('Do you really want to DELETE?')">Delete</a>
+                        {% else %}
+                        <a href="#" class="delete" onclick="return confirm('You are not authorised to Delete!')">Delete</a>
+
+                        {% endif %}
+                    </td>
+                </tr>
+
+
+                <div id="modaledit{{i.serial}}" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                  
+                  
+                       <div class="modal-content">
+                  
+                  
+                          <div class="modal-header">
+                  
+                  
+                             <h4 class="modal-title">Update Data</h4>
+                  
+                  
+                          </div>
+                  
+                  
+                            <div class="modal-body">
+                  
+                  
+                             <form action="{{url_for('UpdateADMIN')}}" method="POST">
+                  
+                  
+                                    <div class="form-group">
+                                        <label>Serial No.:</label>
+                                        <input type="hidden"  name="serial_no" value="{{i.serial}}">
+                                        <input type="text" class="form-control" name="serial" value="{{i.serial}}" disabled>
+                                    </div>
+                  
+                  
+                  
+                                    <div class="form-group">
+                                        <label>IP Address:</label>
+                                        <input type="hidden"  name="ip_addr" value="{{i.ip}}">
+                                        <input type="text" class="form-control" name="ip" value="{{i.ip}}">
+                                    </div>
+                  
+                  
+                                    <div class="form-group">            
+                                        <label>Printer Name:</label>
+                        
+                                        <input type="text" class="form-control" name="name" value="{{i.name}}">
+                                    </div>
+                                    
+                                    <div class="form-group">            
+                                        <label>Brand:</label>
+                                        <input type="text" class="form-control" name="brand" value="{{i.brand}}" disabled>
+                                        <!-- <select  class ='form-control' name="brand"> -->
+                                            <!-- <option value={{i.brand}} selected hidden>{{i.brand}}</option> -->
+                                            <!-- <option value="Canon">Canon</option> -->
+                                            <!-- <option value="Kyocera">Kyocera</option> -->
+                                            <!-- <option value="Brother">Brother</option> -->
+                                            <!-- <option value="HP">HP</option> -->
+                                            <!-- <option value="Ricoh">Ricoh</option>                                         -->
+
+                                        <!-- </select> -->
+                                        
+                                    </div>
+
+                                    
+                                     
+                                    
+
+                                    <div class="form-group">            
+                                        <label>Location Code:</label>
+                        
+                                        <input type="text" class="form-control" name="loc_code" value="{{i.loc_code}}">
+                                    </div>
+
+                                    <div class="form-group">            
+                                        <label>Entity:</label>
+                        
+                                        <select class="form-control" id="department" name="dept">
+                                            <option value={{i.dept}} selected hidden>{{i.dept}}</option>
+                                            <option value="Fulfilment Center">Fulfilment Center</option>
+                                            <option value="Mother Hub">Mother Hub</option>
+                                            <option value="Grocery">Grocery</option>
+                                            <option value="Hyper local">Hyper local</option>
+                                            <option value="Large DC">Large DC</option>
+                                            <option value="Large Last Mile">Large Last Mile</option>
+                                            <option value="Regional Office">Regional Office</option>
+                                            <option value="Zonal Office">Zonal Office</option>
+                                            <option value="Transport Center">Transport Center</option>
+                                            <option value="FPS">FPS</option>
+                                            <option value="Cross Dock-Grocery">Cross Dock-Grocery</option>
+                                            <option value="City Logistics">City Logistics</option>
+                                            <option value="CL-First Mile">CL-First Mile</option>
+                                            <option value="CL-Last Mile">CL-Last Mile</option>
+                                            <option value="CL-ODH">CL-ODH</option>
+                                        </select>
+                                    </div>
+
+                                    
+                                    <div class="form-group">            
+                                        <label>Printer Status:</label>
+                        
+                                        <select class="form-control" id="status" name="status">
+                                            <option value={{i.status}} selected hidden>{{i.status}}</option>
+                                            <option value="Deployed">Deployed</option>
+                                            <option value="Stock">Stock</option>
+                                            <option value="Damage">Damage</option>
+                                            <option value="Faulty">Faulty</option>
+                                            <option value="Out_of_contract">Out of Contract</option>
+                                        </select>
+                                    </div>
+                  
+                                    <div class="form-group">
+                    
+                                        <button class="btn btn-primary" type="submit">Update</button>
+                                    
+                                    </div>
+                  
+                  
+                             </form>
+                  
+                  
+                            </div>
+                  
+                  
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background-color: #ec6b16;">Close</button>
+                            </div>
+                  
+                  
+                       </div>
+                  
+                  
+                    </div>
+                  
+                 </div>
+
+                  
+                {% endfor %}
+                                
+        
+          </table>
+          
+          
+    
+</body>
+
+</html>

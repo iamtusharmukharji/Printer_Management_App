@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="{{url_for('static', filename='titleImg.png')}}" type="image/icon type">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMT UMP</title>
+    <style>
+        .loginDiv {
+            height: 400px;
+            width: 350px;
+            background-color: #fcfcfc;
+            border-radius: 15px;
+            box-shadow: 0px 8px 10px gray, 
+        -10px 8px 15px gray, 10px 8px 15px gray;
+        }
+
+        #icon {
+            height: 75px;
+            padding-top: 10px;
+            border: 1px solid rgb(0, 127, 214);
+            background-color: rgb(0, 127, 214);
+            border-radius: 15px 15px 0px 0px;
+        }
+
+        #alrt {
+
+            height: 20px;
+            
+        }
+
+        .container {
+            height: 130px;
+            
+
+
+        }
+
+        .footer {
+            height: 80px;
+            
+            margin-top: 0px;
+
+        }
+
+        .row {
+            height: 50px;
+            margin-top: 50px;
+        }
+
+        input[type="text"],
+        select,
+        textarea {
+            height: 60%;
+            width: 70%;
+            border: 2px solid #75bce6;
+            outline: none;
+            margin-top: 10px;
+            margin-left: 15%;
+            float: left;
+        }
+
+        input[type="text"]:focus {
+            border: 2px solid #f18100;
+        }
+        input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+        input[type="number"],
+        select,
+        textarea {
+            height: 60%;
+            width: 70%;
+            border: 2px solid #75bce6;
+            outline: none;
+            margin-top: 10px;
+            margin-left: 15%;
+            float: left;
+        }
+
+        input[type="number"]:focus {
+            border: 2px solid #f18100;
+        }
+
+        .butt {
+            width: 40%;
+            height: 40px;
+            margin-top: 0%;
+            background-color: #f58e11;
+            border: none;
+            color: white;
+            font-family: Arial;
+            font-size: 20px;
+
+            outline: none;
+        }
+
+        .butt:hover,
+        .butt:active {
+            background-color: #e78104;
+            cursor: pointer;
+            /* border: 2px solid #75bce6; */
+            /* border-radius: 10px; */
+        }
+
+        .butt:active {
+            background-color: #e78104;
+            cursor: pointer;
+            outline: none;
+        }
+
+        a:link,
+        a:visited {
+            text-decoration: none;
+            font-family: Arial, Helvetica, sans-serif;
+            color: rgb(0, 102, 255)
+        }
+
+        a:hover {
+            text-decoration: underline;
+            font-family: Arial, Helvetica, sans-serif;
+            color: red;
+            text-underline-position: none;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <center><br>
+        <h2 style="font-family: Arial, Helvetica, sans-serif; font-size: 200%;color: rgb(11, 137, 255);">PMT User Management Portal
+        </h2>
+    </center>
+
+    <br>
+    <center>
+        <div class="loginDiv">
+
+            <div id="icon">
+                <center><img src="{{url_for('static', filename='LoginLOGO.png')}}" width="70" height="70">
+            </div>
+            <div id="alrt">
+                <center>
+                    <h5 style="font-family: Arial, Helvetica, sans-serif;color: red;font-size: 100%;">{{ALERT}}</h5>
+                </center>
+            </div>
+
+            <form action="/authenticateadmin/{{user.UserID}}" method="POST">
+                <div class="container">
+
+                    <div class="row" >  
+                        <h4 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">An OTP has been sent on your mail {{user.UserID}}</h4>
+                    </div>
+                        <div class="row" style="margin-top: 5px;">  
+                            <input type="number" name="otp" placeholder="OTP..." required>
+                        </div>
+                </div>
+
+
+                <div class="footer">
+                    <center><button class="butt" type="submit">Login</button></center><br>
+
+                </div>
+            </form>
+        </div>
+    </center>
+
+
+</body>
+
+</html>
